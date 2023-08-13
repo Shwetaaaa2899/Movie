@@ -1,0 +1,27 @@
+.detail-container-wrapper{
+    display: flex;
+    width:80%;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 10px #ccc;
+
+height:500p;
+margin: 5%}
+.detail-container-wrapper .left-side-image{
+    width:40%
+    
+}
+.left-side-image img{
+    width:300px;
+    height:300px;
+}
+
+/* right side */
+.detail-container-wrapper .detail-content ul{
+    text-decoration: none;
+    list-style: none;
+    /* text-align: left; */
+}
+.detail-container-wrapper .detail-content{
+    text-align: left;
+}
