@@ -1,19 +1,58 @@
 import { useEffect, useState } from "react";
 import {Header} from "./Header"
+import { NavLink } from "react-router-dom";
 import {usePostsConext } from "./context"
 
 export const WatchListPage = () => {
   
-const {state:{movies, watchlist},dispatch }=usePostsConext()
-console.log(watchlist)
-const showdata = movies.filter((item) => item.watch)
+const {state:{movies},dispatch,state }=usePostsConext()
+console.log("s is",state)
+const [input,setInput] = useState("")
+const inputHandler = (e) =>{
+   setInput(e.target.value)
+}
+const data = movies.filter((item) => item.watch)
+const showdata = input !== ""?data.filter((item) => 
+item.title.toLowerCase().includes(input.trim().toLowerCase())
+||
+item.cast.some((each)=> each.trim().toLowerCase().includes(input.trim().toLowerCase()))
+||
+item.director.toLowerCase().includes(input.trim().toLowerCase())
+)
+:data
+
 
 useEffect(()=>{
     dispatch({type:"SAVE-CURRENT-CHANGES"})
   
 },[movies])
   return   <div>
-  <Header />
+ <div className="header">
+<div className="logo">
+ <NavLink to ="/">
+  <h1>IMDB</h1>
+  </NavLink>
+</div>
+<div className="search-bar">
+  <span className="search-bar-span">
+    <input
+      type="text"
+    
+      placeholder="Search movies by title, cast and director"
+      onChange = {inputHandler}
+    
+    />
+  </span>
+</div>
+<div className="side-nav">
+  <div>Movies</div>
+  <div>
+  <NavLink to = "/watchlist">
+  Watch List
+  </NavLink></div>
+  <div>Starred Movies</div>
+</div>
+</div>
   <div className="card-container">
   {
     showdata.length === 0 &&

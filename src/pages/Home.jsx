@@ -15,7 +15,7 @@ const [showdata,setShowData] = useState(movies)
 const [input,setInput] = useState("")
 const inputChangeHandler = (e) =>{
     setInput(e.target.value)
-    console.log(input)
+    // console.log(input)
 }
 // console.log(state)
 const [leftcategory, setCategory] = useState("all");
@@ -76,12 +76,21 @@ const handleRatingCatgeoryChange = (e) => {
           </span>
         </div>
         <div className="side-nav">
-          <div>Movies</div>
+          <div>
+          <NavLink to = "/">
+          <li>
+          Movies
+          </li>
+          </NavLink></div>
           <div>
           <NavLink to = "/watchlist">
-          Watch List
+          <li>    Watch List</li>
+      
           </NavLink></div>
-          <div>Starred Movies</div>
+          <div>
+          <li>
+          Starred Movies
+          </li></div>
         </div>
       </div>
       ;
@@ -132,7 +141,7 @@ const handleRatingCatgeoryChange = (e) => {
                 <option value="1994">1994</option>
               </select>
             </div>  
-            <p>{categoryWisedata.length}</p>
+            {/* <p>{categoryWisedata.length}</p> */}
             <div>
             <select
                 value={ratingCategory}

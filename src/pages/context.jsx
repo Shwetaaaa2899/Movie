@@ -3,18 +3,18 @@ import { useState, createContext, useContext, useReducer } from "react";
 import {movies} from "./db"
 const  LocalStoargeMovie =   JSON.parse( localStorage.getItem('movies'))
             
-const initialState = { movies: LocalStoargeMovie?LocalStoargeMovie:
+const initialState = {
+   movies: LocalStoargeMovie?LocalStoargeMovie:
     movies,
     
    
-     watchlist: [], starred: [] };
+     watchlist: [],
+     input:"" ,
+     starred: []
+    };
 const PostReducer = (state, action) => {
   switch (action.type) {
-    case "GET-MOVIES":
-      return {
-        ...state,
-        movies: action.payload
-      };
+  
 
     case "ADD-A-MOVIE":
       console.log("post added", action.payload);
@@ -64,6 +64,7 @@ const PostReducer = (state, action) => {
         };
 
         case "SAVE-CURRENT-CHANGES":
+          console.log("Called")
             const updatedData = [...state.movies]
             localStorage.setItem('movies',JSON.stringify(updatedData))
             return {...state,mmovies:updatedData}
@@ -81,6 +82,13 @@ const PostReducer = (state, action) => {
                   ...state,
                   watchlist: [...state.movies].filter((movie) => movie.watch)
                 };
+
+                case "SEARCH-DATA":
+                  console.log("search",action.payload)
+                  return {
+                    ...state,
+                    input: action.payload
+                  };
 
     default:
       return state;
